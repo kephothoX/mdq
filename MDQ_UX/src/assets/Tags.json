@@ -1,0 +1,84 @@
+{
+    "content_tags": [
+        {
+            "Name": "Science",
+            "Value": "Science"
+        },
+        {
+            "Name": "Artificial Intelligence",
+            "Value": "Artificial Intelligence"
+        },
+        {
+            "Name": "Spirituality",
+            "Value": "Spirituality"
+        },
+        {
+            "Name": "Machine Learning",
+            "Value": "Machine Learning"
+        },
+        {
+            "Name": "Comics",
+            "Value": "Comics"
+        },
+        {
+            "Name": "Music",
+            "Value": "Music"
+        },
+        {
+            "Name": "Movies",
+            "Value": "Movies"
+        },
+        {
+            "Name": "Hollywood",
+            "Value": "Hollywood"
+        },
+        {
+            "Name": "Football",
+            "Value": "Footbal"
+        },
+        {
+            "Name": "Poems",
+            "Value": "Poems"
+        },
+        {
+            "Name": "Cyber Security",
+            "Value": "Cyber Security"
+        },
+        {
+            "Name": "Computer Networks",
+            "Value": "Computer Networks"
+        },
+        {
+            "Name": "Programming Languages",
+            "Value": "Programming Languages"
+        },
+        {
+            "Name": "Software Development",
+            "Value": "Software development"
+        },
+        {
+            "Name": "Hackathons",
+            "Value": "Hackathons"
+        },
+        {
+            "Name": "Databases",
+            "Value": "Databasess"
+        },
+        {
+            "Name": "Generative AI",
+            "Value": "Generative AI"
+        },
+        {
+            "Name": "Hosting",
+            "Value": "Hosting"
+        },
+        {
+            "Name": "Back-end Development",
+            "Value": "Back-end Development"
+        },
+        {
+            "Name": "Front-end Development",
+            "Value": "Front-end Development"
+        }
+    ]
+}

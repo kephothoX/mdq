@@ -1,0 +1,86 @@
+<nav class="mat-elevation-z8 mb-1">
+  <mat-toolbar class="mat-elevation-z6">
+    <mat-toolbar-row  color="primary" class="bg-whiter"  style="justify-content: flex-end !important;">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="bg-whiter text-primary" id="apps">
+        <mat-icon class="material-symbols-outlined">apps</mat-icon>
+      </button>
+       <h2 class="pr-2 text-ks">MDQ</h2>
+      <mat-menu #menu="matMenu">
+        <a routerLink="/home">
+          <button mat-menu-item>
+            <mat-icon class="material-symbols-outlined">home</mat-icon>
+            <h3 class="text-primary">MDQ</h3>
+            <small>Bids Hub</small>
+          </button>
+        </a>
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item [matMenuTriggerFor]="adminActions">
+          <mat-icon class="material-symbols-outlined">settings_suggest</mat-icon>
+          Manage Items
+        </button>
+
+        <mat-menu #adminActions="matMenu">
+          <a routerLink="/admin/upload" >
+            <button mat-menu-item>
+              <mat-icon class="material-symbols-outlined">add_circle</mat-icon>
+              New Item
+            </button>
+          </a>
+
+          <mat-divider></mat-divider>
+
+        </mat-menu>
+        <mat-divider></mat-divider>
+
+        <h4 class="pr-3" *ngIf="accountEmail">Logged in as: <span class="text-warn">{{ accountEmail }}</span></h4>
+        <h4 class="pr-3" *ngIf="!accountEmail">Not Logged in. <a routerLink="/personal/auth/signin">Login to
+            Continue</a></h4>
+
+        <mat-divider></mat-divider>
+      </mat-menu>       
+
+      <div>
+        <button mat-raised-button color="warn" class="text-white" (click)=getHederaCredentials()>
+        <mat-icon class="mat-symbols-outlined">private_connectivity</mat-icon>
+        Get Hedera Credentials
+      </button>
+
+        <button mat-raised-button color="primary" class="text-white" (click)="connectWallet()">
+          <mat-icon class="material-symbols-outlined">wallet</mat-icon>
+          Connect MetaMask Wallet
+        </button>
+        
+      </div>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row color="accent" class="mat-elevation-z4 text-white display-flex mb-2 bg-accent" style="justify-content: flex-end !important;">
+      <div>
+        <a routerLink="/bids" class="text-white">
+          <span class="p-1 m-1">Bids </span>
+        </a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</nav>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Let Gemini Help</h1>
+        <button mat-mini-fab color="warn" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close" align="end">
+          <mat-icon class="material-symbols-outlined">close</mat-icon>
+        </button>
+      </div>
+      
+      <div class="modal-footer">
+        <button mat-raised-button color="warn" class="btn-close text-white" data-bs-dismiss="modal" align="end">
+          <mat-icon class="material-symbols-outlined">close</mat-icon>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

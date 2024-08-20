@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://fabulous-hornet-327.convex.site",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

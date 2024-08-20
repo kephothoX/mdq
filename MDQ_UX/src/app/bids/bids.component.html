@@ -1,0 +1,41 @@
+<section class="container-fluid">
+  <div class="mat-elevation-z8 card-group flex-row" *ngIf="Items">
+    <mat-card class="mat-elevation-z6 card m-2" *ngFor="let entry of Items">
+      <mat-card-title class="p-1 m-1">
+        <h1 class="fs-1 text-primary">Items Available For Bidding</h1>
+      </mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-header>
+        <h3 class="fs-3 align-center">{{ entry.name }}</h3>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <a routerLink="/bids/view/{{ entry._id}}">
+          <div class="col d-flex flex-row">
+            <img src="{{  entry.item_images[1] }}" alt="MISoko"
+              class="card-img-top img-thumbnail object-fit-fill rounded mx-auto d-block" />
+
+          </div>
+        </a>
+
+        <div class="card-body">
+          <p class="card-text article">{{ entry.location }}</p>
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <a routerLink="/bids/view/{{ entry._id}}">
+          <button mat-raised-button color="primary">
+            <mat-icon class="mat-symbols-outlined">swipe_right_alt</mat-icon>
+            Open To Bid
+          </button>
+        </a>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="!Items">
+    <mat-progress-bar mode="buffer" color="primary"></mat-progress-bar>
+    <h2>Loading Items.....</h2>
+  </mat-card>
+</section>

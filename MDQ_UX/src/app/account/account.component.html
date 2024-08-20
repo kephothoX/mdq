@@ -1,0 +1,53 @@
+<section>
+    <mat-card>
+        <mat-card-content>
+            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" class="nav-tabs">
+                <mat-tab label="My Account">
+                    <ng-template mat-tab-label>
+                        <span class="m-2 p-2">
+                            <mat-icon color="accent" class="material-symbols-outlined pr-2">accounts</mat-icon>
+                            Account
+                        </span>
+                    </ng-template>
+                    <mat-divider></mat-divider>
+
+                    <mat-card>
+                        <mat-card-content>
+                            <form [formGroup]="newAccountForm" class="mat-elevation-z4 centered form col-lg-6 col-md-10 col-sm-12"
+        enctype="application/x-www-form-url-encoded"  (ngSubmit)="ngOnSubmit()">
+
+        <div class="alert alert-danger" role="alert" *ngIf="ErrMsg">
+          <h5>{{ ErrMsg }}</h5>
+        </div>
+
+
+        <mat-form-field appearance="fill" class="p-1  form-control">
+          <mat-label>Hedera Private Key</mat-label>
+          <mat-icon matPrefix class="material-symbols-outlined">info</mat-icon>
+          <mat-hint align="end">Add Hedera Private Key to MetaMask Wallet</mat-hint>
+          <input type="text" matInput formControlName="hederaPrivateKey" placeholder="Hedera Private Key">
+        </mat-form-field>       
+
+
+
+        <mat-card-actions class="align-buttons-center">
+          <button type="submit" mat-raised-button color="primary"
+            [disabled]="!newAccountForm.valid"><mat-icon>save</mat-icon>Save Ad</button>
+          <button type="reset" mat-raised-button color="warn"><mat-icon>cancel</mat-icon>Clear</button>
+        </mat-card-actions>
+
+
+      </form>
+                        </mat-card-content>
+                    
+                    </mat-card>
+
+
+                </mat-tab>
+
+
+            </mat-tab-group>
+
+        </mat-card-content>
+    </mat-card>
+</section>

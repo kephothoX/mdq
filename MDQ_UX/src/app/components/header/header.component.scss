@@ -1,0 +1,19 @@
+app-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent !important;
+  z-index: 9999;
+}
+
+
+#apps {
+  position: absolute;
+  left: 0;
+}
+
+mat-toolbar {
+  background-color: #00aabb !important;
+  color: #ffffff !important;
+  font-family: "Urbanist-Bold" !important;
+}
