@@ -1,9 +1,7 @@
 <section class="container-fluid">
+    <h1 class="fs-1 text-primary">Items Available For Bidding</h1>
   <div class="mat-elevation-z8 card-group flex-row" *ngIf="Items">
     <mat-card class="mat-elevation-z6 card m-2" *ngFor="let entry of Items">
-      <mat-card-title class="p-1 m-1">
-        <h1 class="fs-1 text-primary">Items Available For Bidding</h1>
-      </mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-header>
         <h3 class="fs-3 align-center">{{ entry.name }}</h3>
