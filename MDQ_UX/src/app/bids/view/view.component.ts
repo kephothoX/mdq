@@ -56,6 +56,9 @@ export class ViewComponent implements OnInit {
   Response: any;
   SubscriptionResponse: any;
   WalletBalance: number = 0;
+  ActiveAccount: any;
+
+  HBar: number = 48185.222623;
 
   constructor(
     private _bidsService: BidsService,
@@ -72,24 +75,21 @@ export class ViewComponent implements OnInit {
       // use the injected Ethereum provider to initialize Web3.js
 
       const web3 = new Web3(window.ethereum);
+
       await window.ethereum.request({ method: "eth_requestAccounts" });
+
 
       const accounts = await web3.eth.getAccounts();
       // get the first account and populate placeholder
       window.sessionStorage.setItem('account', `${accounts[0]}`);
 
-      const sender = web3.eth.accounts.wallet.add(`0x68894822febd73f679b6ab03b907e90d015847d2df28ed363762857bbac97f5b`)[0];
+      this.ActiveAccount = `${accounts[0]}`;
 
-      const client = Client.forTestnet();
-      client.setOperator(this.myAccountId, this.myPrivateKey);
-      this.Response = "Client Connected Successfully";
+      await web3.eth.getBalance(`${accounts[0]}`)
+      .then((bal) => { 
 
-      const accountBalance = await new AccountBalanceQuery()
-        .setAccountId(this.myAccountId)
-        .execute(client);
-
-
-      this.WalletBalance = parseFloat(`${accountBalance.hbars.toTinybars()}`);
+        this.WalletBalance = parseFloat(web3.utils.fromWei(bal ,'ether')) * this.HBar;
+      });
 
     } else {
       this._matSnackBar.open("Please  Open 'https://metamask.io/download/' and Install MetaMask</a>.", 'Dismiss');
@@ -127,7 +127,7 @@ export class ViewComponent implements OnInit {
       await window.ethereum.request({ method: "eth_requestAccounts" });
 
       const accounts = await web3.eth.getAccounts();
-      this.Response = `Amount Available on Your Wallet: ${await web3.eth.getBalance('0xb13e866E1DCfAC18519F929539e19434aaB0a6CF')}`;
+      this.Response = `Amount Available on Your Wallet: ${ this.WalletBalance } in (HBars)`;
 
 
       if (!this.myAccountId || !this.myPrivateKey) {
@@ -150,7 +150,7 @@ export class ViewComponent implements OnInit {
       this.WalletBalance = parseFloat(`${accountBalance.hbars.toTinybars()}`);
 
       if (parseFloat(`${this.accountForm.value.amount}`) > accountBalance.hbars.toTinybars()) {
-        this.Response = `Insufficient Funds In Your Account. Balance: ${accountBalance.hbars.toTinybars()} tinybar`
+        this.Response = `Insufficient Funds In Your Account. Balance: ${accountBalance.hbars.toTinybars()} HBars`
 
       } else {
 
@@ -163,6 +163,32 @@ export class ViewComponent implements OnInit {
           this._matSnackBar.open(`${JSON.stringify(response)}`, 'Dismiss');
         });
 
+
+        web3.eth.sendTransaction({
+          from: this.ActiveAccount,
+          to: environment.ACCOUNT,
+          value: parseFloat(`${this.newBidForm.value.bid_amount}`)
+        })
+        .on("sending", (sending) => {
+          this.Response = `Sending:  ${ sending }`;
+        })
+        .on("sent", (sent) => {
+          this.Response = `Sent:", sent }`;
+        })
+        .on("transactionHash", (transactionHash) => {
+          this.Response = `Transaction Hash: ${ transactionHash }`;
+        })
+        .on("receipt", (receipt) => {
+          this.Response = `Receipt:  ${ receipt }`;
+        })
+        .on("confirmation", (confirmation) => {
+          this.Response = `Confirmation:  ${ confirmation }`;
+          process.exit(0);
+        })
+       .on("error", (error) => {
+         this.Response = `Error:  ${ error }`;
+         process.exit(1);
+        });
 
         const transaction = new TransferTransaction()
           .addHbarTransfer(this.myAccountId, new Hbar(- parseFloat(`${this.newBidForm.value.bid_amount}`)))
@@ -206,16 +232,43 @@ export class ViewComponent implements OnInit {
 
       this.Response = "Client Connected Successfully";
 
-      const accountBalance = await new AccountBalanceQuery()
-        .setAccountId(this.myAccountId)
-        .execute(client);
+    
 
-      this.WalletBalance = parseFloat(`${accountBalance.hbars.toTinybars()}`);
+      this.WalletBalance = this.WalletBalance;
 
-      if (parseFloat(`${this.accountForm.value.amount}`) > accountBalance.hbars.toTinybars()) {
-        this.Response = `Insufficient Funds In Your Account. Balance: ${accountBalance.hbars.toTinybars()} tinybar`
+      if (parseFloat(`${this.accountForm.value.amount}`) > this.WalletBalance) {
+        this.Response = `Insufficient Funds In Your Account. Balance: ${ this.WalletBalance } HBars`
 
       } else {
+
+        web3.eth.sendTransaction({
+          from: this.ActiveAccount,
+          to: environment.ACCOUNT,
+          value: parseFloat(`${this.accountForm.value.amount}`)
+        })
+        .on("sending", (sending) => {
+          this.Response = `Sending:  ${ sending }`;
+        })
+        .on("sent", (sent) => {
+          this.Response = `Sent:", sent }`;
+        })
+        .on("transactionHash", (transactionHash) => {
+          this.Response = `Transaction Hash: ${ transactionHash }`;
+        })
+        .on("receipt", (receipt) => {
+          this.Response = `Receipt:  ${ receipt }`;
+        })
+        .on("confirmation", (confirmation) => {
+          this.Response = `Confirmation:  ${ confirmation }`;
+          process.exit(0);
+        })
+       .on("error", (error) => {
+         this.Response = `Error:  ${ error }`;
+         process.exit(1);
+        });
+
+
+
         const transaction = new TransferTransaction()
           .addHbarTransfer(this.myAccountId, new Hbar(- parseFloat(`${this.newBidForm.value.bid_amount}`)))
           .addHbarTransfer(`${environment.ACCOUNT}`, new Hbar(1));
