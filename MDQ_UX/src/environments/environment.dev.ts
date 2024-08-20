@@ -2,7 +2,7 @@
 export const environment = {
   production: false,
 
-  APIEndpoint:  'https://fabulous-hornet-327.convex.site/api',
+  APIEndpoint:  'https://lovable-hound-696.convex.site/api',
 
   HEDERA_PRIVATE_KEY: '302e020100300506032b657004220420d083dcf51d7c9d8e5a37225bf75133af0fff4a1156278a2d5de35855e1fc1c0d',
 

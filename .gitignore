@@ -1,7 +1,5 @@
-node_modules/*
-dist/*
-!dist/.gitkeep
-.angular/*
-.history/*
-.vscode/*
+
+.angular/
+.history/
+.vscode/
 .angulardoc.json

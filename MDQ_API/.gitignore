@@ -1,6 +1,6 @@
 
 .env.local
-node_modules/*
+node_modules/
 .env.local
-dist/*
+dist/
 process.env
